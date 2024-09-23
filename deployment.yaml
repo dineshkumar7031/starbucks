@@ -24,12 +24,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: starbucks-ssvc
+  name: startbucks-service
+  namespace: webapps  # Change if necessary
 spec:
+  type: NodePort
   selector:
-    app: starbucks
+    app: starbucks # This should match the labels of your pods
   ports:
-    - protocol: "TCP"
-      port: 80
-      targetPort: 9001 
-  type: LoadBalancer
+    - port: 80       # Port exposed internally
+      targetPort: 8080  # Port on the pod
+      nodePort: 30000  # Optional: specify the node port or let Kubernetes choose one
+
